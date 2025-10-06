@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>承認一覧</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data-manager.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>EXAS</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" id="menu-btn">メニュー</a></li>
+                    <li><a href="#">過去伝票照会</a></li>
+                    <li><a href="#">概算精算</a></li>
+                    <li><a href="#" id="slip-list-link">入力伝票照会</a></li>
+                    <li><a href="#">ヘルプ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>ログインユーザ： テストユーザ①</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="form-row title-row">
+                <h1>承認一覧</h1>
+            </div>
+                        <hr class="section-divider">
+
+                    <!-- 検索条件 -->
+        <div class="search-section" style="background-color: #f5f5f5; border-radius: 8px; padding: 24px; margin-bottom: 16px; min-height: 200px;">
+                <h2 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold;">検索条件</h2>
+                <form class="search-form">
+                    <!-- 伝票区分 -->
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                        <label style="min-width: 60px;">伝票区分:</label>
+                        <div class="rounding-options" style="gap: 0px;">
+                            <input type="radio" id="slip-type-general" name="slip-type" value="general" checked>
+                            <label for="slip-type-general">一般</label>
+                            <input type="radio" id="slip-type-gratuity" name="slip-type" value="gratuity">
+                            <label for="slip-type-gratuity">謝金</label>
+                            <input type="radio" id="slip-type-estimate" name="slip-type" value="estimate">
+                            <label for="slip-type-estimate">概算</label>
+                        </div>
+                    </div>
+                    
+                    <!-- 承認状況 -->
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                        <label style="min-width: 60px;">承認状況:</label>
+                        <div class="rounding-options" style="gap: 0px;">
+                            <input type="radio" id="approval-status-pending" name="approval-status" value="pending">
+                            <label for="approval-status-pending">未承認</label>
+                            <input type="radio" id="approval-status-approved" name="approval-status" value="approved">
+                            <label for="approval-status-approved">承認</label>
+                            <input type="radio" id="approval-status-rejected" name="approval-status" value="rejected">
+                            <label for="approval-status-rejected">否認</label>
+                            <input type="radio" id="approval-status-all" name="approval-status" value="all" checked>
+                            <label for="approval-status-all">全て</label>
+                        </div>
+                    </div>
+                    
+                    <!-- 入力日 -->
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                        <label style="min-width: 60px;">入力日:</label>
+                        <input type="date" id="input-date-from" name="input-date-from" style="width: 120px;">
+                        <span style="margin: 0 8px;">～</span>
+                        <input type="date" id="input-date-to" name="input-date-to" style="width: 120px;">
+                    </div>
+                    
+
+                </form>
+            </div>
+
+            <!-- データテーブル -->
+            <div class="approval-table" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 40px;">No</th>
+                            <th rowspan="2" style="width: 40px;">M</th>
+                            <th rowspan="2" style="width: 80px;">承認状況</th>
+                            <th rowspan="2" style="width: 120px;">相手先</th>
+                            <th colspan="2" class="group-header">支払情報</th>
+                            <th colspan="6" class="group-header">請求情報</th>
+                        </tr>
+                        <tr>
+                            <th class="sub-header" style="width: 80px;">担当者</th>
+                            <th class="sub-header" style="width: 100px;">モニターNo.</th>
+                            <th class="sub-header" style="width: 100px;">請求金額</th>
+                            <th class="sub-header" style="width: 100px;">内消費税額</th>
+                            <th class="sub-header" style="width: 80px;">担当者</th>
+                            <th class="sub-header" style="width: 100px;">部署</th>
+                            <th class="sub-header" style="width: 200px;">タイトル</th>
+                            <th class="sub-header" style="width: 80px;">番</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="checkbox" checked></td>
+                            <td class="status-approved">経理承認</td>
+                            <td>テレビ朝日サービス</td>
+                            <td>小林 大祐</td>
+                            <td>31405949</td>
+                            <td class="amount">165,000</td>
+                            <td class="amount">15,000</td>
+                            <td>大野 由美子</td>
+                            <td>デジタルソリ</td>
+                            <td>トンベイ運用保守業務</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><input type="checkbox"></td>
+                            <td class="status-approved">経理承認</td>
+                            <td>テレビ朝日サービス</td>
+                            <td>小林 大祐</td>
+                            <td>31466427</td>
+                            <td class="amount">2,016,300</td>
+                            <td class="amount">183,300</td>
+                            <td>大野 由美子</td>
+                            <td>デジタルソリ</td>
+                            <td>PrismDJ保守</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><input type="checkbox"></td>
+                            <td class="status-approved">経理承認</td>
+                            <td>テレビ朝日サービス</td>
+                            <td>小林 大祐</td>
+                            <td>31466433</td>
+                            <td class="amount">110,000</td>
+                            <td class="amount">10,000</td>
+                            <td>大野 由美子</td>
+                            <td>デジタルソリ</td>
+                            <td>設備検収稼働予定...</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><input type="checkbox"></td>
+                            <td class="status-approved">経理承認</td>
+                            <td>テレビ朝日サービス</td>
+                            <td>小林 大祐</td>
+                            <td>31472494</td>
+                            <td class="amount">165,000</td>
+                            <td class="amount">15,000</td>
+                            <td>大野 由美子</td>
+                            <td>デジタルソリ</td>
+                            <td>トンベイ運用保守業務</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 全選択・全解除・CSV出力ボタン -->
+            <div style="margin-top: 10px; text-align: left;">
+                <button type="button" id="select-all-btn" class="secondary-btn">全選択</button>
+                <button type="button" id="deselect-all-btn" class="secondary-btn" style="margin-left: 10px;">全解除</button>
+                <button type="button" id="csv-export-btn" class="secondary-btn" style="margin-left: 10px;">CSV出力</button>
+            </div>
+
+            <!-- 修正ボタン -->
+            <div style="margin-top: 10px; text-align: left;">
+                <button type="button" id="modify-btn" class="secondary-btn">修正(U)</button>
+                <button type="button" id="inquiry-btn" class="secondary-btn" style="margin-left: 10px;">照会(R)</button>
+                <button type="button" id="approve-btn" class="secondary-btn" style="margin-left: 10px;">承認(S)</button>
+                <button type="button" id="cancel-approval-btn" class="secondary-btn" style="margin-left: 10px;">承認解除</button>
+                <button type="button" id="reject-btn" class="secondary-btn" style="margin-left: 10px; font-size: 0.7rem;">否認</button>
+                <button type="button" id="print-btn" class="secondary-btn" style="margin-left: 10px;">印刷(P)</button>
+            </div>
+
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright © IT-Studio All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 検索機能
+        document.getElementById('search-btn').addEventListener('click', function() {
+            // 検索ロジックを実装
+            console.log('検索実行');
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            // フォームをクリア
+            document.querySelectorAll('input[type="text"], input[type="date"]').forEach(input => {
+                input.value = '';
+            });
+            // ラジオボタンをリセット
+            document.getElementById('general').checked = true;
+            document.getElementById('all').checked = true;
+            document.getElementById('other-expenses').checked = true;
+        });
+
+        // 全選択
+        document.getElementById('select-all-btn').addEventListener('click', function() {
+            document.querySelectorAll('.approval-table input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        });
+
+        // 全解除
+        document.getElementById('deselect-all-btn').addEventListener('click', function() {
+            document.querySelectorAll('.approval-table input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        });
+
+        // CSV出力
+        document.getElementById('csv-export-btn').addEventListener('click', function() {
+            const table = document.querySelector('.approval-table table');
+            const rows = table.querySelectorAll('tbody tr');
+            let csvContent = '';
+
+            // ヘッダー行を追加
+            const headers = [];
+            const headerRows = table.querySelectorAll('thead tr');
+            
+            // 1行目のヘッダー
+            const firstRowHeaders = headerRows[0].querySelectorAll('th');
+            firstRowHeaders.forEach((th, index) => {
+                const rowspan = th.getAttribute('rowspan');
+                const colspan = th.getAttribute('colspan');
+                
+                if (rowspan === '2') {
+                    headers[index] = th.textContent.trim();
+                } else if (colspan) {
+                    // colspanがある場合は、その数だけヘッダーを追加
+                    const headerText = th.textContent.trim();
+                    const colCount = parseInt(colspan);
+                    for (let i = 0; i < colCount; i++) {
+                        headers[index + i] = headerText;
+                    }
+                }
+            });
+            
+            // 2行目のヘッダー
+            if (headerRows[1]) {
+                const secondRowHeaders = headerRows[1].querySelectorAll('th');
+                secondRowHeaders.forEach((th, index) => {
+                    headers[index + 2] = th.textContent.trim(); // 最初の2列（No, M）をスキップ
+                });
+            }
+            
+            // ヘッダー行をCSVに追加
+            csvContent += headers.join(',') + '\n';
+
+            // データ行を追加
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = [];
+                
+                cells.forEach((cell, index) => {
+                    let cellText = cell.textContent.trim();
+                    
+                    // チェックボックスの場合は選択状態を表示
+                    const checkbox = cell.querySelector('input[type="checkbox"]');
+                    if (checkbox) {
+                        cellText = checkbox.checked ? '✓' : '';
+                    }
+                    
+                    // カンマや改行が含まれる場合はダブルクォートで囲む
+                    if (cellText.includes(',') || cellText.includes('\n') || cellText.includes('"')) {
+                        cellText = '"' + cellText.replace(/"/g, '""') + '"';
+                    }
+                    
+                    rowData.push(cellText);
+                });
+                
+                csvContent += rowData.join(',') + '\n';
+            });
+
+            // CSVファイルをダウンロード
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', '承認一覧_' + new Date().toISOString().slice(0, 10) + '.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // アクションボタン
+        document.getElementById('modify-btn').addEventListener('click', function() {
+            console.log('修正');
+        });
+
+        document.getElementById('inquiry-btn').addEventListener('click', function() {
+            console.log('照会');
+        });
+
+        document.getElementById('approve-btn').addEventListener('click', function() {
+            console.log('承認');
+        });
+
+        document.getElementById('cancel-approval-btn').addEventListener('click', function() {
+            console.log('承認解除');
+        });
+
+        document.getElementById('reject-btn').addEventListener('click', function() {
+            console.log('否認');
+        });
+
+        document.getElementById('print-btn').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('close-btn').addEventListener('click', function() {
+            window.close();
+        });
+
+        // 現在時刻の更新
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.getFullYear() + '/' + 
+                             String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                             String(now.getDate()).padStart(2, '0') + ' ' + 
+                             String(now.getHours()).padStart(2, '0') + ':' + 
+                             String(now.getMinutes()).padStart(2, '0');
+            document.querySelector('.current-time').textContent = timeString;
+        }
+
+        // 1分ごとに時刻を更新
+        setInterval(updateTime, 60000);
+        updateTime(); // 初期表示
+    </script>
+</body>
+</html> 

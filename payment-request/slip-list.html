@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>伝票一覧</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data-manager.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>EXAS</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" id="menu-btn">メニュー</a></li>
+                    <li><a href="#">過去伝票照会</a></li>
+                    <li><a href="#">概算精算</a></li>
+                    <li><a href="#" id="slip-list-link">入力伝票照会</a></li>
+                    <li><a href="#">ヘルプ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>ログインユーザ： テストユーザ①</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="form-row title-row">
+                <h1>伝票一覧</h1>
+            </div>
+            <hr class="section-divider">
+
+            <!-- 検索条件エリア -->
+            <div class="search-section">
+                <h2>検索条件</h2>
+                <form id="search-form" class="search-form">
+                    <div class="search-row">
+                        <div class="search-group">
+                            <label for="search-registration-number">登録番号</label>
+                            <input type="text" id="search-registration-number" name="registration-number" placeholder="登録番号を入力">
+                        </div>
+                        <div class="search-group">
+                            <label for="search-staff-id">担当者ID</label>
+                            <input type="text" id="search-staff-id" name="staff-id" placeholder="担当者IDを入力">
+                        </div>
+                        <div class="search-group">
+                            <label for="search-payee-name">相手先名</label>
+                            <input type="text" id="search-payee-name" name="payee-name" placeholder="相手先名を入力">
+                        </div>
+                    </div>
+                    
+                    <div class="search-row">
+                        <div class="search-group">
+                            <label for="search-date-from">取引日（開始）</label>
+                            <input type="date" id="search-date-from" name="date-from">
+                        </div>
+                        <div class="search-group">
+                            <label for="search-date-to">取引日（終了）</label>
+                            <input type="date" id="search-date-to" name="date-to">
+                        </div>
+                        <div class="search-group">
+                            <label for="search-amount-from">金額（以上）</label>
+                            <input type="number" id="search-amount-from" name="amount-from" placeholder="0" min="0">
+                        </div>
+                        <div class="search-group">
+                            <label for="search-amount-to">金額（以下）</label>
+                            <input type="number" id="search-amount-to" name="amount-to" placeholder="999999999" min="0">
+                        </div>
+                    </div>
+
+                    <div class="search-actions">
+                        <button type="submit">検索</button>
+                        <button type="button" id="clear-search-btn" class="secondary-btn">クリア</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 一覧表示エリア -->
+            <div class="list-section">
+                <div class="list-header">
+                    <h2>伝票一覧</h2>
+                    <div class="list-info">
+                        <span id="total-count">0件</span>
+                        <span id="total-amount">合計金額: ￥0</span>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="slip-list-table" class="list-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-col="registrationNumber">登録番号</th>
+                                <th class="sortable" data-col="createdAt">登録日時</th>
+                                <th class="sortable" data-col="staffName">担当者</th>
+                                <th class="sortable" data-col="payeeName">相手先</th>
+                                <th class="sortable" data-col="transactionDate">取引日</th>
+                                <th class="sortable" data-col="totalAmount">支払金額</th>
+                                <th class="sortable" data-col="totalTax">消費税額</th>
+                                <th class="sortable" data-col="detailCount">明細数</th>
+                                <th class="actions">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slip-list-tbody">
+                            <!-- データがここに表示されます -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ページネーション -->
+                <div class="pagination">
+                    <button type="button" id="prev-page-btn" disabled>前のページ</button>
+                    <span id="page-info">1 / 1 ページ</span>
+                    <button type="button" id="next-page-btn" disabled>次のページ</button>
+                    <select id="page-size-select">
+                        <option value="10">10件/ページ</option>
+                        <option value="20" selected>20件/ページ</option>
+                        <option value="50">50件/ページ</option>
+                        <option value="100">100件/ページ</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 詳細表示モーダル -->
+            <div id="slip-detail-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>伝票詳細</h3>
+                        <span class="modal-close">&times;</span>
+                    </div>
+                    <div class="modal-body" id="slip-detail-content">
+                        <!-- 詳細内容がここに表示されます -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="secondary-btn modal-close">閉じる</button>
+                        <button type="button" id="edit-slip-btn">編集</button>
+                        <button type="button" id="delete-slip-btn" class="danger-btn">削除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/slip-list.js"></script>
+</body>
+</html> 

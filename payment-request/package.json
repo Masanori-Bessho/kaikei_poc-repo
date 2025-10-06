@@ -1,0 +1,38 @@
+{
+  "name": "payment-request-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for payment request system",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install",
+    "test:visual": "playwright test --grep \"視覚的回帰テスト|視覚的比較テスト|高度な視覚的回帰テスト\"",
+    "test:visual:update": "playwright test --grep \"視覚的回帰テスト|視覚的比較テスト|高度な視覚的回帰テスト\" --update-snapshots",
+    "test:visual:debug": "playwright test --grep \"視覚的回帰テスト|視覚的比較テスト|高度な視覚的回帰テスト\" --debug",
+    "test:visual:stable": "playwright test visual-regression-stable.spec.js",
+    "test:visual:stable:update": "playwright test visual-regression-stable.spec.js --update-snapshots",
+    "test:visual:simple": "playwright test visual-regression-simple.spec.js",
+    "test:visual:simple:update": "playwright test visual-regression-simple.spec.js --update-snapshots",
+    "test:functional": "playwright test functional-tests.spec.js"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "payment-request"
+  ],
+  "author": "Test Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "details": [
+    {
+      "id": "detail_001",
+      "type": "project",
+      "project": "プロジェクトA",
+      "projectDetail": "営業部",
+      "account": "外注費",
+      "summary": "Webサイト制作費",
+      "amount": 350000,
+      "taxCategory": "taxable",
+      "taxType": "external",
+      "taxAmount": 35000,
+      "advance": "",
+      "segment": "テレビ放送事業",
+      "subcontract": true,
+      "createdAt": "2024-12-25T10:00:00Z",
+      "updatedAt": "2024-12-25T10:00:00Z"
+    },
+    {
+      "id": "detail_002",
+      "type": "program",
+      "program": "番組B",
+      "broadcastDate": "2025-06-10",
+      "account": "交通費",
+      "summary": "出張旅費",
+      "amount": 45000,
+      "taxCategory": "taxable",
+      "taxType": "internal",
+      "taxAmount": 4500,
+      "advance": "佐藤次郎",
+      "segment": "テレビ放送事業",
+      "subcontract": false,
+      "createdAt": "2024-12-25T10:05:00Z",
+      "updatedAt": "2024-12-25T10:05:00Z"
+    },
+    {
+      "id": "detail_003",
+      "type": "other",
+      "department": "技術部",
+      "purpose": "機材購入",
+      "account": "接待費",
+      "summary": "クライアント打合せ",
+      "amount": 25000,
+      "taxCategory": "taxable",
+      "taxType": "external",
+      "taxAmount": 2500,
+      "advance": "",
+      "segment": "テレビ放送事業",
+      "subcontract": false,
+      "createdAt": "2024-12-25T10:10:00Z",
+      "updatedAt": "2024-12-25T10:10:00Z"
+    }
+  ]
+} 
