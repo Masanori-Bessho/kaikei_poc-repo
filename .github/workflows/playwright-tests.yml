@@ -1,0 +1,39 @@
+name: Playwright Functional Tests
+
+on:
+  pull_request:   # PR作成や更新時に実行
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.jsをセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # 3. 依存パッケージをインストール
+      - name: Install dependencies
+        run: |
+          cd payment-request
+          npm ci
+
+      # 4. Playwrightブラウザをインストール
+      - name: Install Playwright browsers
+        run: |
+          cd payment-request
+          npx playwright install --with-deps
+
+      # 5. テスト実行
+      - name: Run Playwright tests
+        run: |
+          cd payment-request
+          npx playwright test tests/functional-tests.spec.js
