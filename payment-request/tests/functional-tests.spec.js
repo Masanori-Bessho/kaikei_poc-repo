@@ -7,7 +7,7 @@ test.describe('機能テスト（視覚的回帰なし）', () => {
     await page.waitForLoadState('networkidle');
     
     // ページが正常に読み込まれることを確認
-    await expect(page).toHaveTitle('支払依頼登録(github連携⑤)');
+    await expect(page).toHaveTitle('支払依頼登録(github連携⑧)');
     await expect(page.locator('h1').filter({ hasText: '支払依頼登録' })).toContainText('支払依頼登録');
     
     // 主要な要素が表示されることを確認
@@ -152,7 +152,7 @@ test.describe('機能テスト（視覚的回帰なし）', () => {
   test('ナビゲーション機能', async ({ page }) => {
     // 各ページにアクセスして基本要素が表示されることを確認
     const pages = [
-      { url: '/index.html', title: '支払依頼登録(github連携⑤)' },
+      { url: '/index.html', title: '支払依頼登録(github連携⑧)' },
       { url: '/approval-list.html', title: '承認一覧' },
       { url: '/slip-list.html', title: '伝票一覧' }
     ];

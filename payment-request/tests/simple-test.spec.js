@@ -10,7 +10,7 @@ test.describe('シンプルテスト', () => {
     await page.waitForTimeout(100);
     
     // 基本的な要素の存在確認
-    await expect(page).toHaveTitle('支払依頼登録(github連携⑤)');
+    await expect(page).toHaveTitle('支払依頼登録(github連携⑧)');
     await expect(page.locator('h1').filter({ hasText: '支払依頼登録' })).toContainText('支払依頼登録');
   });
 
