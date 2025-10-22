@@ -7,7 +7,7 @@ test.describe('支払依頼登録ページ', () => {
   });
 
   test('ページが正常に読み込まれる', async ({ page }) => {
-    await expect(page).toHaveTitle('支払依頼登録(github連携18)');
+    await expect(page).toHaveTitle('支払依頼登録(github連携19)');
     await expect(page.locator('h1').filter({ hasText: '支払依頼登録' })).toContainText('支払依頼登録');
   });
 
