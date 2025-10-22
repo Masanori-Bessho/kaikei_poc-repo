@@ -20,6 +20,15 @@ jobs:
         with:
           node-version: '18'
 
+      # ★ ここでPlaywrightブラウザのキャッシュを復元
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('payment-request/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       # 3. 依存パッケージをインストール
       - name: Install dependencies
         run: |
